@@ -1,9 +1,38 @@
-# Getting started with Crawlee
+# Simple website crawler to Xata
 
-This example uses `PlaywrightCrawler` to recursively crawl https://crawlee.dev using the browser automation library [Playwright](https://playwright.dev).
+This uses Crawlee, Cheerio, and Breakdance to do a simple crawler that inserts the content of a website as Markdown in a Xata database. The data can be used then for search, semantic search, or Q&A with ChatGPT.
 
-You can find more examples and documentation at the following links:
+To crawl a new website:
 
-- [Step-by-step tutorial](https://crawlee.dev/docs/introduction) for Crawlee
-- `PlaywrightCrawler` [API documentation](https://crawlee.dev/api/playwright-crawler/class/PlaywrightCrawler)
-- Other [examples](https://crawlee.dev/docs/examples/playwright-crawler)
+* Create a new Xata database, with this schema (you can create it with `xata init --schema schema.json`):
+
+```json
+{
+  "tables": [
+    {
+      "name": "content",
+      "columns": [
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "website",
+          "type": "string"
+        },
+        {
+          "name": "content",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
+```
+* Update `.xatarc` with your Xata DB URL, or use `xata init` to connect it.
+* Edit the `websites` array in `src/main.ts` to add the website you want to crawl.
+* Run `npm start` to crawl the website.

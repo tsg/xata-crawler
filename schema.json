@@ -1,0 +1,25 @@
+{
+  "tables": [
+    {
+      "name": "content",
+      "columns": [
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "website",
+          "type": "string"
+        },
+        {
+          "name": "content",
+          "type": "text"
+        }
+      ]
+    }
+  ]
+}
