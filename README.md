@@ -34,5 +34,6 @@ To crawl a new website:
 }
 ```
 * Update `.xatarc` with your Xata DB URL, or use `xata init` to connect it.
+* Make sure you have the `XATA_API_KEY` defined in `.env`.
 * Edit the `websites` array in `src/main.ts` to add the website you want to crawl.
 * Run `npm start` to crawl the website.
