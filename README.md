@@ -1,6 +1,6 @@
 # Simple website crawler to Xata
 
-This uses Crawlee, Cheerio, and Breakdance to do a simple crawler that inserts the content of a website as Markdown in a Xata database. The data can be used then for search, semantic search, or Q&A with ChatGPT.
+This uses [Crawlee](crawlee.dev), [Cheerio](https://cheerio.js.org/), and [Breakdance](https://breakdance.github.io/breakdance/) to do a simple crawler that inserts the content of a website as Markdown in a Xata database. The data can be used then for search, semantic search, or Q&A with ChatGPT.
 
 To crawl a new website:
 
