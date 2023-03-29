@@ -1,4 +1,4 @@
-import { CheerioCrawler } from "crawlee";
+import { CheerioCrawler, PlaywrightCrawler } from "crawlee";
 import breakdance from "breakdance";
 import { getXataClient } from "./xata.js";
 import * as crypto from "crypto";
@@ -60,11 +60,45 @@ const websites = [
     ContentSelector: "#content",
   },
   {
+    Skip: true,
+    Name: "nuxt2-docs",
+    StartUrls: ["https://nuxtjs.org/docs/get-started/installation"],
+    Globs: ["http?(s)://nuxtjs.org/docs/**"],
+    ContentSelector: ".docus-content",
+  },
+  {
+    Skip: true,
+    Name: "netlify-docs",
+    StartUrls: ["https://docs.netlify.com/get-started/"],
+    Globs: ["http?(s)://docs.netlify.com/**"],
+    ContentSelector: ".wrapper__content",
+  },
+  {
+    Skip: true,
     Name: "vercel-docs",
-    StartUrls: ["https://vercel.com/docs"],
+    StartUrls: ["https://vercel.com/docs/concepts/get-started/deploy"],
     Globs: ["http?(s)://vercel.com/docs/**"],
-    Exclude: ["http?(s)://vercel.com/docs/rest-api"],
-    ContentSelector: "main .content",
+    ContentSelector: "main",
+  },
+  {
+    Skip: true,
+    Name: "vuejs-guide",
+    StartUrls: ["https://vuejs.org/guide/introduction.html"],
+    Globs: ["http?(s)://vuejs.org/guide/**"],
+    ContentSelector: "main",
+  },
+  {
+    Skip: true,
+    Name: "postgres-docs",
+    StartUrls: ["https://www.postgresql.org/docs/current/index.html"],
+    Globs: ["http?(s)://www.postgresql.org/docs/current/**"],
+    ContentSelector: "#docContent",
+  },
+  {
+    Name: "prisma-docs",
+    StartUrls: ["https://www.prisma.io/docs/getting-started"],
+    Globs: ["http?(s)://www.prisma.io/docs/**"],
+    ContentSelector: "article",
   },
 ] as WebsiteCrawlerOptions[];
 
@@ -73,8 +107,7 @@ for (const website of websites) {
   const crawler = new CheerioCrawler({
     // Let's limit our crawls to make our
     // tests shorter and safer.
-    //maxRequestsPerCrawl: 20,
-    maxRequestsPerCrawl: 1000,
+    maxRequestsPerCrawl: 10000,
 
     // enqueueLinks is an argument of the requestHandler
     async requestHandler({ $, request, enqueueLinks }) {
@@ -106,6 +139,5 @@ for (const website of websites) {
       });
     },
   });
-
   await crawler.run(website.StartUrls);
 }
